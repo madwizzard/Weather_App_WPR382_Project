@@ -1,6 +1,6 @@
 :root {
-  --section-overlay: rgba(0, 162, 255, 0.7);
-  --background-overlay: rgba(252, 252, 252, 0.2);
+  --overlay_sect: rgba(4, 21, 77, 0.7);
+  --overlay_bg: rgba(252, 252, 252, 0.2);
 }
 
 * {
@@ -20,7 +20,7 @@
 .overlay {
   width: 100%;
   height: 100vh;
-  background-color: var(--background-overlay);
+  background-color: var(--overlay_bg);
 }
 
 .container {
@@ -41,14 +41,14 @@
   width: 100%;
   padding: 1rem;
   border-radius: 0.4rem;
-  color: rgb(0, 0, 0);
+  color: #fff;
 }
 
 .section__inputs, .section__temperature {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: var(--section-overlay);
+  background-color: var(--overlay_sect);
 }
 
 .section__inputs>input {
@@ -59,6 +59,7 @@
   padding: 0.5rem;
   font-size: 20px;
   font-weight: 200;
+  text-transform: capitalize;
 }
 
 .section__inputs>input:focus {

@@ -5,14 +5,14 @@ import { useEffect, useState } from "react";
 import { getFormattedWeatherData } from "./weather_Service";
 
 function App() {
-  const [city, setCity] = useState("Paris");
+  const [zip, setZip] = useState("1541");
   const [weather, setWeather] = useState(null);
   const [units, setUnits] = useState("metric");
   const [bg, setBg] = useState(hotBg);
 
   useEffect(() => {
     const fetchWeatherData = async () => {
-      const data = await getFormattedWeatherData(city, units);
+      const data = await getFormattedWeatherData(zip, units);
       setWeather(data);
 
       // dynamic bg
@@ -22,7 +22,7 @@ function App() {
     };
 
     fetchWeatherData();
-  }, [units, city]);
+  }, [units, zip]);
 
   const handleUnitsClick = (e) => {
     const button = e.currentTarget;
@@ -35,7 +35,7 @@ function App() {
 
   const enterKeyPressed = (e) => {
     if (e.keyCode === 13) {
-      setCity(e.currentTarget.value);
+      setZip(e.currentTarget.value);
       e.currentTarget.blur();
     }
   };
@@ -49,8 +49,8 @@ function App() {
               <input
                 onKeyDown={enterKeyPressed}
                 type="text"
-                name="city"
-                placeholder="Enter City..."
+                name="zip"
+                placeholder="Enter Zip code in South Africa..."
               />
               <button onClick={(e) => handleUnitsClick(e)}>°F</button>
             </div>

@@ -34,7 +34,7 @@ const Descriptions = ({ weather, units }) => {
     {
       id: 4,
       icon: <MdCompress />,
-      title: "pressure",
+      title: "pressure ground level",
       data: weather.pressure,
       unit: "hPa",
     },
