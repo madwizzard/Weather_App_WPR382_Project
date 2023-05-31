@@ -4,7 +4,7 @@ const Icon_URL = (iconId) =>
   `https://openweathermap.org/img/wn/${iconId}@2x.png`;
 
 const getFormattedWeatherData = async (zip, units = "metric") => {
-  const URL = `https://api.openweathermap.org/data/2.5/weather?q=${zip},za&appid=${API_KEY}&units=${units}`;
+  const URL = `https://api.openweathermap.org/data/2.5/weather?q=${zip}za&appid=${API_KEY}&units=${units}`;
 
   const data = await fetch(URL)
     .then((res) => res.json())
