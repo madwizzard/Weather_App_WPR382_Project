@@ -1,6 +1,6 @@
 :root {
-  --section-overlay: rgba(0, 0, 0, 0.7);
-  --background-overlay: rgba(0, 0, 0, 0.2);
+  --section-overlay: rgba(0, 162, 255, 0.7);
+  --background-overlay: rgba(252, 252, 252, 0.2);
 }
 
 * {
@@ -15,91 +15,83 @@
   height: 100vh;
   background-position: center;
   background-size: cover;
-
 }
 
 .overlay {
   width: 100%;
   height: 100vh;
-  background: var(--background-overlay);
-
+  background-color: var(--background-overlay);
 }
 
 .container {
-  max-width: 800 px;
+  max-width: 800px;
   margin: auto;
   height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 1rem;
-  align-items: center;
 
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  padding: 1rem;
 }
 
-/* header */
+/* Top  */
 
 .section {
   width: 100%;
   padding: 1rem;
   border-radius: 0.4rem;
-  color: white;
-
+  color: rgb(0, 0, 0);
 }
 
-.section__input,
-.section__temp {
+.section__inputs, .section__temperature {
   display: flex;
   align-items: center;
   justify-content: space-between;
   background-color: var(--section-overlay);
-
 }
-.section__input>input {
+
+.section__inputs>input {
   border: 0.8px solid white;
   border-radius: 0.4rem;
   background-color: transparent;
-  padding: 0.5rem;
   color: white;
+  padding: 0.5rem;
   font-size: 20px;
   font-weight: 200;
-
 }
 
-.section__input>input:focus {
+.section__inputs>input:focus {
   outline: none;
 }
 
-.section__input>button {
+.section__inputs>button {
+  padding: 10px 50px;
   border: none;
-  border-radius: 0.4rem;
-  background-color: transparent;
-  color: white;
+  border-radius: 00.4rem;
   font-size: 20px;
   font-weight: 500;
-  padding: 10px 50px;
-  
+  background-color: white;
 }
 
-.section__input>button:hover {
+.section__inputs>button:hover {
   cursor: pointer;
-  background-color: darkgrey;
+  background-color: lightgray;
 }
 
-.icon{
+.icon {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
 }
 
-.icon>h3{
- font-size: 15px;
- font-weight: 200;
- text-transform: capitalize;
+.icon>h3 {
+  font-size: 15px;
+  font-weight: 200;
+  text-transform: capitalize;
 }
 
-.temp>h1{
+.temperature>h1 {
   font-size: 60px;
-  
 }
