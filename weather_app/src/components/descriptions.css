@@ -1,0 +1,32 @@
+.section__descript{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
+}
+.card{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--section-overlay);
+    padding: 1rem;
+    border-radius: 0.4rem;
+}
+.descript__card-icon{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 5px;
+    margin-bottom: 12px;
+}
+.descript__card-icon>small{
+    text-transform: capitalize;
+}
+@media screen and (max-width: 1024px) {
+    .section__descript{
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+    
