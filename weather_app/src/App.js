@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { getFormattedWeatherData } from "./weather_Service";
 
 function App() {
-  const [zip, setZip] = useState("1541");
+  const [zip, setZip] = useState("8001");
   const [weather, setWeather] = useState(null);
   const [units, setUnits] = useState("metric");
   const [bg, setBg] = useState(hotBg);
@@ -16,7 +16,7 @@ function App() {
       setWeather(data);
 
       // dynamic bg
-      const threshold = units === "metric" ? 20 : 60;
+      const threshold = units === "metric" ? 20 : 66.3;
       if (data.temp <= threshold) setBg(coldBg);
       else setBg(hotBg);
     };
@@ -45,12 +45,13 @@ function App() {
       <div className="overlay">
         {weather && (
           <div className="container">
+            <div className="section section__Head"><h3>South African Weather Today</h3></div>
             <div className="section section__inputs">
               <input
                 onKeyDown={enterKeyPressed}
                 type="text"
                 name="zip"
-                placeholder="Enter Zip code in South Africa..."
+                placeholder="Enter Zip code..."
               />
               <button onClick={(e) => handleUnitsClick(e)}>°F</button>
             </div>
@@ -60,12 +61,11 @@ function App() {
                 <h3>{`${weather.name}, ${weather.country}`}</h3>
                 <img src={weather.iconURL} alt="weatherIcon" />
                 <h3>{weather.description}</h3>
-              </div>
-              <div className="temperature">
                 <h1>{`${weather.temp.toFixed()} °${
                   units === "metric" ? "C" : "F"
                 }`}</h1>
               </div>
+             
             </div>
 
             {/* bottom description */}
