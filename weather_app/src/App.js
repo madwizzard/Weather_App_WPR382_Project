@@ -2,38 +2,42 @@ import hotBg from "./assets/hot.jpg";
 import coldBg from "./assets/cold.jpg";
 import Descriptions from "./components/Descriptions";
 import { useEffect, useState } from "react";
-import { getFormattedWeatherData } from "./weather_Service";
+import axios from 'axios';
 
 function App() {
-  const [zip, setZip] = useState("1541");
+  const [zip, setZip] = useState("8001");
   const [weather, setWeather] = useState(null);
   const [units, setUnits] = useState("metric");
   const [bg, setBg] = useState(hotBg);
 
   useEffect(() => {
     const fetchWeatherData = async () => {
-      const data = await getFormattedWeatherData(zip, units);
-      setWeather(data);
+      try {
+        const response = await axios.get("http://localhost:3000/weather", {
+          params: {
+            zip: zip,
+            units: units,
+          },
+        });
+        setWeather(response.data);
 
-      // dynamic bg
-      const threshold = units === "metric" ? 20 : 60;
-      if (data.temp <= threshold) setBg(coldBg);
-      else setBg(hotBg);
+        // dynamic bg
+        const threshold = units === "metric" ? 20 : 66.3;
+        if (response.data.temp <= threshold) setBg(coldBg);
+        else setBg(hotBg);
+      } catch (error) {
+        console.log("Failed to fetch weather data:", error);
+      }
     };
 
     fetchWeatherData();
   }, [units, zip]);
 
-  const handleUnitsClick = (e) => {
-    const button = e.currentTarget;
-    const currentUnit = button.innerText.slice(1);
-
-    const isCelsius = currentUnit === "C";
-    button.innerText = isCelsius ? "°F" : "°C";
-    setUnits(isCelsius ? "metric" : "imperial");
+  const handleUnitsClick = () => {
+    setUnits(units === "metric" ? "imperial" : "metric");
   };
 
-  const enterKeyPressed = (e) => {
+  const enterKeyPressed = async (e) => {
     if (e.keyCode === 13) {
       setZip(e.currentTarget.value);
       e.currentTarget.blur();
@@ -45,30 +49,30 @@ function App() {
       <div className="overlay">
         {weather && (
           <div className="container">
+            <div className="section section__Head">
+              <h3>South African Weather Today</h3>
+            </div>
             <div className="section section__inputs">
               <input
                 onKeyDown={enterKeyPressed}
                 type="text"
                 name="zip"
-                placeholder="Enter Zip code in South Africa..."
+                placeholder="Enter Zip code..."
               />
-              <button onClick={(e) => handleUnitsClick(e)}>°F</button>
+              <button onClick={handleUnitsClick}>
+                {units === "metric" ? "°F" : "°C"}
+              </button>
             </div>
-
             <div className="section section__temperature">
               <div className="icon">
                 <h3>{`${weather.name}, ${weather.country}`}</h3>
                 <img src={weather.iconURL} alt="weatherIcon" />
                 <h3>{weather.description}</h3>
-              </div>
-              <div className="temperature">
                 <h1>{`${weather.temp.toFixed()} °${
                   units === "metric" ? "C" : "F"
                 }`}</h1>
               </div>
             </div>
-
-            {/* bottom description */}
             <Descriptions weather={weather} units={units} />
           </div>
         )}

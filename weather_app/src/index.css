@@ -43,8 +43,23 @@
   border-radius: 0.4rem;
   color: #fff;
 }
+.section__Head{
+  max-width: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--overlay_sect);
+}
+.section__Head>h3{
+  font-size: 25px;
+  font-weight: 200;
+  text-transform: capitalize;
+  margin-bottom: 0.4rem;
+  margin-top: 0.4rem;
 
-.section__inputs, .section__temperature {
+}
+.section__inputs {
+  max-width: 600px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -52,10 +67,10 @@
 }
 
 .section__inputs>input {
-  border: 0.8px solid white;
+  border: 0.8px solid rgb(0, 247, 255);
   border-radius: 0.4rem;
   background-color: transparent;
-  color: white;
+  color: rgb(0, 247, 255);
   padding: 0.5rem;
   font-size: 20px;
   font-weight: 200;
@@ -72,14 +87,21 @@
   border-radius: 00.4rem;
   font-size: 20px;
   font-weight: 500;
-  background-color: white;
+  background-color: rgb(0, 247, 255);
 }
 
 .section__inputs>button:hover {
   cursor: pointer;
-  background-color: lightgray;
+  background-color: rgb(0, 148, 247);
 }
 
+.section__temperature{
+  max-width: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--overlay_sect);
+}
 .icon {
   display: flex;
   flex-direction: column;
@@ -88,11 +110,14 @@
 }
 
 .icon>h3 {
-  font-size: 15px;
+  font-size: 25px;
   font-weight: 200;
   text-transform: capitalize;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
 }
 
-.temperature>h1 {
+.icon>h1 {
+  margin-top: 1rem;
   font-size: 60px;
 }
