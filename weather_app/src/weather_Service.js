@@ -1,3 +1,6 @@
+const express = require("express");
+const app = express();
+const port = 3000;
 
 const API_KEY = "8bd57e7c8b4c47a7d74835a2f88ae461";
 
