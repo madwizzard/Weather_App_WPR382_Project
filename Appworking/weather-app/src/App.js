@@ -25,7 +25,7 @@ function App() {
           },
         });
         setWeather(response.data);
-        const threshold = units === "metric" ? 20 : 66.3;
+        const threshold = units === "metric" ? 20 : 67.3;
         if (response.data.temp <= threshold) setBg(coldBg);
         else setBg(hotBg);
       } catch (error) {
