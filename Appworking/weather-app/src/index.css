@@ -1,15 +1,41 @@
+
+  /* Colors for the overlay and other pieces of the app */
 :root {
+    /* Background overlay over the whole page */
   --overlay_sect: rgba(0, 0, 0, 0.6);
+
+  /* Background overlay to make the cards stand out */
   --overlay_bg: rgba(0, 0, 0, 0.1);
+  
+  /* The color of most of the text */
+  --text__color: rgb(255, 255, 255);
+
+  /* Color for the border around the search bar */
+  --inputborder__color: rgb(255, 255, 255);
+
+  /* Background color of the temperature button */
+  --button__bg: rgb(255, 255, 255);
+
+  /* Text color of the temperature button */
+  --button__textcolor: rgb(8, 24, 95);
+
+  /* Background color of the temperature button when hovering above it */
+  --buttonhover__bg: rgb(8, 24, 95);
+
+  /* Text color of the temperature button when hovering above it */
+  --buttonhover__textcolor : rgb(255, 255, 255);
 }
 
+
+
+
+/* Selecting font and how the website will be displayed*/
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
-
 .app {
   width: 100%;
   height: 100vh;
@@ -17,12 +43,17 @@
   background-size: cover;
 }
 
+
+
+
+/* This adds a background to our cards so they are visible */
 .overlay {
   width: 100%;
   height: 100vh;
   background-color: var(--overlay_bg);
 }
 
+/* This changes how the data is displayed within the cards */
 .container {
   max-width: 800px;
   margin: auto;
@@ -34,16 +65,16 @@
   flex-direction: column;
   padding: 1rem;
 }
-
-/* Top  */
-
 .section {
   width: 100%;
   padding: 1rem;
   border-radius: 0.4rem;
-  color: #fff;
+  color: var(--text__color);
   margin: 1rem 0;
 }
+
+
+/* The header section with the website name */
 .section__Head{
   max-width: 600px;
   display: flex;
@@ -60,6 +91,9 @@
   margin-top: 0.4rem;
 
 }
+
+
+/* The input section with the search bar and unit change button */
 .section__inputs {
   max-width: 600px;
   display: flex;
@@ -69,10 +103,10 @@
 }
 
 .section__inputs>input {
-  border: 0.8px solid rgb(255, 255, 255);
+  border: 0.8px solid var(--inputborder__color);
   border-radius: 0.4rem;
   background-color: transparent;
-  color: rgb(255, 255, 255);
+  color: var(--text__color);
   padding: 0.5rem;
   font-size: 20px;
   font-weight: 200;
@@ -89,14 +123,18 @@
   border-radius: 0.4rem;
   font-size: 20px;
   font-weight: 500;
-  background-color: rgb(255, 255, 255);
+  background-color: var(--button__bg);
+  color: var(--button__textcolor);
 }
 
 .section__inputs>button:hover {
   cursor: pointer;
-  background-color: rgb(248, 37, 37);
+  background-color: var(--buttonhover__bg);
+  color: var(--buttonhover__textcolor);
 }
 
+
+/* The Display section with the weather data that is displayed when you search */
 .section__temperature{
   max-width: 600px;
   display: flex;
