@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import Background from "./components/Background";
+import hotBg from "./assets/hot.jpg";
+import coldBg from "./assets/cold.jpg";
 import InputSection from "./components/InputSection";
 import TemperatureSection from "./components/TemperatureSection";
 import Descriptions from "./components/Descriptions";
+import HeadSection from "./components/HeadSection";
 
 function App() {
   const [zip, setZip] = useState("8001");
   const [weather, setWeather] = useState(null);
   const [units, setUnits] = useState("metric");
-
+  const [bg, setBg] = useState(hotBg);
   useEffect(() => {
     const fetchWeatherData = async () => {
       try {
@@ -20,10 +22,14 @@ function App() {
           },
         });
         setWeather(response.data);
+        const threshold = units === "metric" ? 20 : 66.3;
+        if (response.data.temp <= threshold) setBg(coldBg);
+        else setBg(hotBg);
       } catch (error) {
         console.log("Failed to fetch weather data:", error);
       }
     };
+    
 
     fetchWeatherData();
   }, [units, zip]);
@@ -43,14 +49,11 @@ function App() {
     <>
       {weather && (
         <>
-          <div >
-            <Background units={units} temp={weather.temp} />
+          
+          <div className="app" style={{ backgroundImage: `url(${bg})` }}>
             <div className="overlay">
               <div className="container">
-                <div className="section section__Head">
-                  <h3>South African Weather Today</h3>
-                </div>
-
+                <HeadSection />
                 <InputSection
                   zip={zip}
                   setZip={setZip}
@@ -58,13 +61,12 @@ function App() {
                   handleUnitsClick={handleUnitsClick}
                   handleEnterKeyPressed={handleEnterKeyPressed}
                 />
-
-
                 <TemperatureSection weather={weather} units={units} />
                 <Descriptions weather={weather} units={units} />
               </div>
             </div>
           </div>
+          
         </>
       )}
     </>
