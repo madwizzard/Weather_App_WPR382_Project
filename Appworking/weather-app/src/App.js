@@ -8,10 +8,13 @@ import Descriptions from "./components/Descriptions";
 import HeadSection from "./components/HeadSection";
 
 function App() {
+  //Setting all the states that will be used in the app
   const [zip, setZip] = useState("8001");
   const [weather, setWeather] = useState(null);
   const [units, setUnits] = useState("metric");
   const [bg, setBg] = useState(hotBg);
+
+  //This is a hook that will run when the component mounts and when the zip or units state changes it also gets the weather data from the server
   useEffect(() => {
     const fetchWeatherData = async () => {
       try {
@@ -30,14 +33,16 @@ function App() {
       }
     };
     
-
+  // This is the call to the fetchWeatherData function in the useEffect hook
     fetchWeatherData();
   }, [units, zip]);
 
+  //This function will change the units state from metric to imperial and vice versa
   const handleUnitsClick = () => {
     setUnits(units === "metric" ? "imperial" : "metric");
   };
 
+  //This function will set the zip code when the enter key is pressed
   const handleEnterKeyPressed = async (e) => {
     if (e.keyCode === 13) {
       setZip(e.currentTarget.value);
@@ -45,6 +50,7 @@ function App() {
     }
   };
 
+// This is the return statement that will render the app 
   return (
     <>
       {weather && (
