@@ -42,6 +42,7 @@
   padding: 1rem;
   border-radius: 0.4rem;
   color: #fff;
+  margin: 1rem 0;
 }
 .section__Head{
   max-width: 600px;
@@ -49,6 +50,7 @@
   align-items: center;
   justify-content: center;
   background-color: var(--overlay_sect);
+  
 }
 .section__Head>h3{
   font-size: 25px;
@@ -84,7 +86,7 @@
 .section__inputs>button {
   padding: 10px 50px;
   border: none;
-  border-radius: 00.4rem;
+  border-radius: 0.4rem;
   font-size: 20px;
   font-weight: 500;
   background-color: rgb(0, 247, 255);
