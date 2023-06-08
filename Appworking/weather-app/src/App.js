@@ -1,15 +1,20 @@
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import hotBg from "./assets/hot.jpg";
 import coldBg from "./assets/cold.jpg";
+import InputSection from "./components/InputSection";
+import TemperatureSection from "./components/TemperatureSection";
 import Descriptions from "./components/Descriptions";
-import { useEffect, useState } from "react";
-import axios from 'axios';
+import HeadSection from "./components/HeadSection";
 
 function App() {
+  //Setting all the states that will be used in the app
   const [zip, setZip] = useState("8001");
   const [weather, setWeather] = useState(null);
   const [units, setUnits] = useState("metric");
   const [bg, setBg] = useState(hotBg);
 
+  //This is a hook that will run when the component mounts and when the zip or units state changes it also gets the weather data from the server
   useEffect(() => {
     const fetchWeatherData = async () => {
       try {
@@ -20,64 +25,57 @@ function App() {
           },
         });
         setWeather(response.data);
-
-        // dynamic bg
-        const threshold = units === "metric" ? 20 : 66.3;
+        const threshold = units === "metric" ? 20 : 67.3;
         if (response.data.temp <= threshold) setBg(coldBg);
         else setBg(hotBg);
       } catch (error) {
         console.log("Failed to fetch weather data:", error);
       }
     };
-
+    
+  // This is the call to the fetchWeatherData function in the useEffect hook
     fetchWeatherData();
   }, [units, zip]);
 
+  //This function will change the units state from metric to imperial and vice versa
   const handleUnitsClick = () => {
     setUnits(units === "metric" ? "imperial" : "metric");
   };
 
-  const enterKeyPressed = async (e) => {
+  //This function will set the zip code when the enter key is pressed
+  const handleEnterKeyPressed = async (e) => {
     if (e.keyCode === 13) {
       setZip(e.currentTarget.value);
       e.currentTarget.blur();
     }
   };
 
+// This is the return statement that will render the app 
   return (
-    <div className="app" style={{ backgroundImage: `url(${bg})` }}>
-      <div className="overlay">
-        {weather && (
-          <div className="container">
-            <div className="section section__Head">
-              <h3>South African Weather Today</h3>
-            </div>
-            <div className="section section__inputs">
-              <input
-                onKeyDown={enterKeyPressed}
-                type="text"
-                name="zip"
-                placeholder="Enter Zip code..."
-              />
-              <button onClick={handleUnitsClick}>
-                {units === "metric" ? "°F" : "°C"}
-              </button>
-            </div>
-            <div className="section section__temperature">
-              <div className="icon">
-                <h3>{`${weather.name}, ${weather.country}`}</h3>
-                <img src={weather.iconURL} alt="weatherIcon" />
-                <h3>{weather.description}</h3>
-                <h1>{`${weather.temp.toFixed()} °${
-                  units === "metric" ? "C" : "F"
-                }`}</h1>
+    <>
+      {weather && (
+        <>
+          
+          <div className="app" style={{ backgroundImage: `url(${bg})` }}>
+            <div className="overlay">
+              <div className="container">
+                <HeadSection />
+                <InputSection
+                  zip={zip}
+                  setZip={setZip}
+                  units={units}
+                  handleUnitsClick={handleUnitsClick}
+                  handleEnterKeyPressed={handleEnterKeyPressed}
+                />
+                <TemperatureSection weather={weather} units={units} />
+                <Descriptions weather={weather} units={units} />
               </div>
             </div>
-            <Descriptions weather={weather} units={units} />
           </div>
-        )}
-      </div>
-    </div>
+          
+        </>
+      )}
+    </>
   );
 }
 
